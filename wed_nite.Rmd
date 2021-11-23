@@ -1,0 +1,65 @@
+---
+title: "Wed_Inclass"
+author: "Keren Gonzalez!!"
+date: "11/17/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# This is a quick-turn challenge.  It relates to Question 2 of Quiz 8 in our course. Take a look at that quiz question and then.
+
+## The researchers wanted to know if the spiders could run faster, on average, without the hindrance of a pedipalp
+
+### Finish this writeUp and knit the result to a pdf file.  
+
+### Email the pdf as an attachment to wkitto1@avc.edu no later than 10 pm tonight
+
+### Think about what you would need to do to add this to your github account
+
+
+
+```{r, message=FALSE}
+require(tidyverse)
+require(tigerstats)
+require(abd)
+data("SpiderSpeed")
+```
+
+
+```{r}
+#mydata <- gather(SpiderSpeed, variable, value) 
+dat <- gather(SpiderSpeed, BorA, speed)
+```
+
+## Spider Speed Boxplot!
+
+```{r}
+boxplot(speed~BorA,data=dat)
+title(main="Spider Speed")
+```
+
+Based off of our box plot, we can see that the spiders' speed is faster after the pedipalp is removed versus before it is removed. The black line on each variable represents the median and speed.after has a higher median than speed.before, and there is a higher maximum in the speed.after plot.
+
+## Numerical Results
+
+```{r}
+favstats(speed~BorA,data=dat)
+```
+
+According to our numerical results, speed.after has a mean of 3.853750, and speed.before has a mean of 2.668125. This means that after the pedipalp is removed, the average speed is higher than before.
+
+## Inferential Results
+
+```{r}
+t.test(speed~BorA,data=dat)
+```
+Our Welch two sample t-test tells us that there is a p-value of 0.0004611. This tells us there is a very small chance that there is no difference between the speed of spiders before and after the removal of the pedipalp. Since this p-value is so small, we can reject the null hypothesis.
+
+## Discussion and Conclusion
+
+In conclusion, there is a difference between the speed before and after the pedipalp is removed off the spiders. Our t-test yielded a small p-value supporting this. On average, there was higher speed for spiders who had their pedipalps removed.
+
+
+
+
